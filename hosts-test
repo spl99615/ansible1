@@ -1,0 +1,10 @@
+# hosts-dev
+
+[ubuntu]
+ubnas ansible_host=192.168.86.157 ansible_port=50022
+
+[centos]
+centnas ansible_host=192.168.86.44 ansible_port=50022
+
+[local]
+control ansible_connection=local
