@@ -13,3 +13,7 @@ variable "keyname" {}
 variable "nameofservice" {
     default = "tf_ansible_test_servers"
 }
+
+variable "rolename" {
+    default = "ec2-s3-full-role"
+}

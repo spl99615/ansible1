@@ -9,3 +9,5 @@ variable "nameofservice" {
 variable "keyname" {
     description = "Name of an existing EC2 KeyPair to enable SSH access into the server"
 }
+
+variable "rolename" {}

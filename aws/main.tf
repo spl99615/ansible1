@@ -16,4 +16,5 @@ module "tf_webservers" {
   ami = "${lookup(var.ami,var.region)}"
   keyname = "${var.keyname}"
   nameofservice = "${var.nameofservice}"
+  rolename = "${var.rolename}"
 }

@@ -1,14 +1,20 @@
 #-----------compute/main.tf-------
+
+data "template_file" "user-init" {
+  template = "${file("${path.module}/userdata.tpl")}"
+}
+
 resource "aws_instance" "tf_ec2" {
-  count = 3
   ami           = "${var.ami}"
   instance_type = "t2.micro"
   key_name      = "${var.keyname}"
   vpc_security_group_ids = ["${aws_security_group.tf_ec2_sg.id}"]
+  iam_instance_profile = "${aws_iam_instance_profile.tf_instance_profile.id}"
+  user_data = "${data.template_file.user-init.rendered}"
+}
 
-  tags {
-    Name = "${var.nameofservice}-${count.index + 1}"
-  }
+resource "aws_iam_instance_profile" "tf_instance_profile" {
+  role = "${var.rolename}"
 }
 
 resource "aws_security_group" "tf_ec2_sg" {
