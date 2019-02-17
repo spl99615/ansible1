@@ -1,3 +1,4 @@
 aws/.terraform/
 aws/terraform.tfvars
 aws/compute/.terraform/
+.DS_Store
