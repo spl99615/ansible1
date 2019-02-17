@@ -4,18 +4,30 @@
   user: spl
   gather_facts: no
   connection: ssh
+  vars_prompt:
+    - name: centpkg
+      prompt: Enter CentOS package to be installed
   tasks:
     - name: Update packages
       yum: name='*' state=latest use_backend=yum
     - name: Install package on centos
       yum: name={{ centpkg }} state=latest
+      when: centpkg is defined and centpkg !='' and centpkg != None
+      tags:
+        - packages
 - hosts: ubuntu
   become: yes
   user: spl
   gather_facts: no
   connection: ssh
+  vars_prompt:
+    - name: ubpkg
+      prompt: Enter Ubuntu package to be installed
   tasks:
     - name: Update cache and packages
       apt: update_cache=yes upgrade=dist
     - name: Install package on ubuntu
       apt: name={{ ubpkg }} state=latest
+      when: ubpkg is defined and ubpkg !='' and ubpkg != None
+      tags:
+        - packages
